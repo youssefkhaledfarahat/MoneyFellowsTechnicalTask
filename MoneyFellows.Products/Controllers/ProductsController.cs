@@ -20,6 +20,7 @@ namespace MoneyFellows.Products.Controllers
         public async Task<IActionResult> GetProductById(int id)
         {
             var product = await _mediator.Send(new GetProductByIdQuery(id));
+            
             return product != null ? Ok(product) : NotFound();
         }
 
@@ -27,6 +28,7 @@ namespace MoneyFellows.Products.Controllers
         public async Task<IActionResult> GetProducts()
         {
             var products = await _mediator.Send(new GetProductsQuery());
+            
             return Ok(products);
         }
 
@@ -34,14 +36,18 @@ namespace MoneyFellows.Products.Controllers
         public async Task<IActionResult> CreateProduct(CreateProductCommand command)
         {
             var productId = await _mediator.Send(command);
+            
             return CreatedAtAction(nameof(GetProductById), new { id = productId }, productId);
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateProduct(int id, UpdateProductCommand command)
         {
-            if (id != command.Id) return BadRequest();
+            if (id != command.Id)
+                return BadRequest();
+
             await _mediator.Send(command);
+            
             return NoContent();
         }
 
@@ -49,6 +55,7 @@ namespace MoneyFellows.Products.Controllers
         public async Task<IActionResult> DeleteProduct(int id)
         {
             await _mediator.Send(new DeleteProductCommand(id));
+            
             return NoContent();
         }
     }
