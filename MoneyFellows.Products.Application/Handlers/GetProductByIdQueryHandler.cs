@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 using MoneyFellows.Products.Application.DTOs;
 using MoneyFellows.Products.Application.Exceptions;
 using MoneyFellows.Products.Application.Queries;

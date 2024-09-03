@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using MoneyFellows.Products.Core.Entities;
 using MoneyFellows.Products.Infrastructure.Configurations;
 
@@ -17,10 +12,10 @@ namespace MoneyFellows.Products.Infrastructure.Data
         {
         }
 
-        public override int SaveChanges()
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             UpdateAuditFields();
-            return base.SaveChanges();
+            return base.SaveChangesAsync();
         }
 
         private void UpdateAuditFields()
@@ -36,10 +31,12 @@ namespace MoneyFellows.Products.Infrastructure.Data
                 if (entry.State == EntityState.Added)
                 {
                     entity.CreatedAt = DateTime.UtcNow;
+                    entity.CreatedBy = "JWT Token UserName";
                 }
                 else if (entry.State == EntityState.Modified)
                 {
                     entity.UpdatedAt = DateTime.UtcNow;
+                    entity.UpdatedBy = "JWT Token UserName (Update)";
                 }
             }
         }

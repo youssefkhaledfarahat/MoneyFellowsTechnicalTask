@@ -40,7 +40,7 @@ namespace MoneyFellows.Products.Controllers
             return CreatedAtAction(nameof(GetProductById), new { id = productId }, productId);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
         public async Task<IActionResult> UpdateProduct(int id, UpdateProductCommand command)
         {
             if (id != command.Id)

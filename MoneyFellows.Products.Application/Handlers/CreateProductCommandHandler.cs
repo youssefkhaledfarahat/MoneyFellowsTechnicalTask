@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 using MoneyFellows.Products.Application.Commands;
 using MoneyFellows.Products.Core.Interfaces;
 using MoneyFellows.Products.Core.Entities;
@@ -30,6 +25,7 @@ namespace MoneyFellows.Products.Application.Handlers
             };
 
             await _repository.AddAsync(product);
+
             return product.Id;
         }
     }

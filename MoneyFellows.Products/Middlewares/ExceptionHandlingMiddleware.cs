@@ -17,6 +17,8 @@ namespace MoneyFellows.Products.Middlewares
             try
             {
                 await _next(context);
+
+                Log.Information($"{context.Request} was handled successfully");
             }
             catch (Exception ex)
             {
@@ -27,10 +29,22 @@ namespace MoneyFellows.Products.Middlewares
 
         private void LogError(Exception ex, HttpContext context)
         {
-            Log.Error(ex, "Unhandled exception occurred");
-            Log.Information("Request Path: {RequestPath}", context.Request.Path);
-            Log.Warning("Request Query: {RequestQuery}", context.Request.QueryString);
-            Log.Debug("Request Headers: {RequestHeaders}", context.Request.Headers);
+            if (ex is ArgumentException || ex is InvalidOperationException)
+            {
+                Log.Warning(ex, "A warning occurred processing the request.");
+            }
+            else if (ex is UnauthorizedAccessException)
+            {
+                Log.Information(ex, "An authorization issue occurred.");
+            }
+            else
+            {
+                Log.Error(ex, "Unhandled exception occurred.");
+            }
+
+            //Log.Debug("Request Path: {RequestPath}", context.Request.Path);
+            //Log.Debug("Request Query: {RequestQuery}", context.Request.QueryString);
+            //Log.Debug("Request Headers: {RequestHeaders}", context.Request.Headers);
         }
 
         private Task HandleExceptionAsync(HttpContext context, Exception ex)
