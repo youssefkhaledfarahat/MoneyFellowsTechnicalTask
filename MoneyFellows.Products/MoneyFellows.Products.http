@@ -1,0 +1,6 @@
+@MoneyFellows.Products_HostAddress = http://localhost:5217
+
+GET {{MoneyFellows.Products_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
