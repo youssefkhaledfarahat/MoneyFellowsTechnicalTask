@@ -16,4 +16,8 @@
     <PackageReference Include="Serilog.Extensions.Logging" Version="8.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MoneyFellows.Products.Core\MoneyFellows.Products.Core.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -8,7 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.1.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="8.0.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MoneyFellows.Products.Application\MoneyFellows.Products.Application.csproj" />
+    <ProjectReference Include="..\MoneyFellows.Products.Infrastructure\MoneyFellows.Products.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
