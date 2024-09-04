@@ -18,7 +18,10 @@ namespace MoneyFellows.Products.Middlewares
             {
                 await _next(context);
 
-                Log.Information($"{context.Request} was handled successfully");
+                Log.Information("Request {Method} {Path} from {RemoteIp} was handled successfully",
+                    context.Request.Method,
+                    context.Request.Path,
+                    context.Connection.RemoteIpAddress?.ToString());
             }
             catch (Exception ex)
             {
